@@ -17,7 +17,7 @@ public class add_Walk_In extends TestBase {
     }
 
     @Test
-    public void login() {
+    public void Add_Customer_To_Queue() {
         util.login();
         queuePage queuePage = new queuePage(driver);
         queuePage.clickOnAddCustomer();
@@ -25,8 +25,10 @@ public class add_Walk_In extends TestBase {
         queuePage.enterDetailsInCustomerAddDialog("test", "123");
         queuePage.sucessMessage();
         queuePage.validateCustomerDetails("Test 123", "IPad");
-
-
+        queuePage.clickOnCustomer("Test 123");
+        queuePage.validateCustomerDetailsPopUp("Test 123");
+        queuePage.selectAdvisor("BLRStore_Server");
+        
     }
 
 

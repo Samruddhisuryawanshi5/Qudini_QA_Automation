@@ -44,11 +44,14 @@ public class queuePage extends TestBase {
     @FindBy(xpath = "//button[text()='Close']")
     WebElement closeButton;
 
+    @FindBy(css = "div[data-testid=\"my-customer-tab\"] h5[class='q-name ng-binding']")
+    WebElement validationName;
+
 
     public void clickOnAddCustomer() {
-             if(isPresent(By.xpath("//button[text()='CLOSE']"))){
-                 closePopUp.click();
-             }
+        if (isPresent(By.xpath("//button[text()='CLOSE']"))) {
+            closePopUp.click();
+        }
 
         addCustomer.click();
     }
@@ -66,13 +69,27 @@ public class queuePage extends TestBase {
         }
         addCustomerDialogueButton.click();
     }
-    public void sucessMessage(){
+
+    public void sucessMessage() {
         Assert.assertTrue(successMessage.isDisplayed());
         closeButton.click();
     }
-    public void validateCustomerDetails(String fullName, String productName){
-        String product=driver.findElement(By.xpath("//li[@data-testid='"+fullName+"-queueCard']//h5[@data-testid='allQueuesV2-productName']")).getText();
-        Assert.assertEquals(product,productName);
+
+    public void validateCustomerDetails(String fullName, String productName) {
+        String product = driver.findElement(By.xpath("//li[@data-testid='" + fullName + "-queueCard']//h5[@data-testid='allQueuesV2-productName']")).getText();
+        Assert.assertEquals(product, productName);
     }
 
+    public void clickOnCustomer(String customerName) {
+        driver.findElement(By.xpath("//li[@data-testid='" + customerName + "-queueCard']//h5[@data-testid='allQueuesV2-productName']")).click();
+    }
+
+    public void validateCustomerDetailsPopUp(String customerName){
+      Assert.assertEquals(validationName.getText(),customerName);
+    }
+
+    public void selectAdvisor(String advisorName){
+        waitUntilElementIsVisible(By.xpath("//div[@class='content-info']//h5[contains(text(),'"+advisorName+"')]"));
+        driver.findElement(By.xpath("//div[@class='content-info']//h5[contains(text(),'"+advisorName+"')]")).click();
+    }
 }
