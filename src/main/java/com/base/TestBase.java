@@ -4,6 +4,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.edge.EdgeDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
@@ -15,8 +16,13 @@ public class TestBase {
     public static WebDriver driver = null;
 
     public WebDriver openBrowser(String name) {
+        boolean isHeadless=true;
         if (name.equalsIgnoreCase("Chrome")) {
-            driver = new ChromeDriver();
+            ChromeOptions options = new ChromeOptions();
+            if(isHeadless){
+                options.addArguments("--headless");
+            }
+            driver = new ChromeDriver(options);
         } else if (name.equalsIgnoreCase("Edge")) {
             driver = new EdgeDriver();
         } else {
