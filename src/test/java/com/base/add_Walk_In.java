@@ -28,7 +28,7 @@ public class add_Walk_In extends TestBase {
         queuePage.clickOnCustomer("Test 123");
         queuePage.validateCustomerDetailsPopUp("Test 123");
         queuePage.selectAdvisor("BLRStore_Server");
-        
+        //When this s is called do throw 500 error
     }
 
 
@@ -36,5 +36,6 @@ public class add_Walk_In extends TestBase {
     public void tearDown() {
         driver.quit();
     }
+
 
 }
