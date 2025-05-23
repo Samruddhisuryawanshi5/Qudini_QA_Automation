@@ -18,17 +18,23 @@ public class add_Walk_In extends TestBase {
 
     @Test
     public void Add_Customer_To_Queue() {
+        double randomNumber = Math.random();
+        String customerName = "Test "+String.valueOf(randomNumber);
+        
         util.login();
         queuePage queuePage = new queuePage(driver);
         queuePage.clickOnAddCustomer();
         queuePage.selectProduct("IPad");
-        queuePage.enterDetailsInCustomerAddDialog("test", "123");
+        queuePage.enterDetailsInCustomerAddDialog(customerName,"");
         queuePage.sucessMessage();
-        queuePage.validateCustomerDetails("Test 123", "IPad");
-        queuePage.clickOnCustomer("Test 123");
-        queuePage.validateCustomerDetailsPopUp("Test 123");
+        queuePage.validateCustomerDetails(customerName, "IPad");
+        queuePage.clickOnCustomer(customerName);
+        queuePage.validateCustomerDetailsPopUp(customerName);
         queuePage.selectAdvisor("BLRStore_Server");
-        //When this s is called do throw 500 error
+        queuePage.quickCompleteButton();
+        queuePage.selectCompleteVisitOptions("Complete Customer");
+        queuePage.validateCustomerNotification("Customer has been added to the Queue");
+
     }
 
 

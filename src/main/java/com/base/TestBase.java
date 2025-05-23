@@ -20,7 +20,7 @@ public class TestBase {
         if (name.equalsIgnoreCase("Chrome")) {
             ChromeOptions options = new ChromeOptions();
             if(isHeadless){
-                options.addArguments("--headless");
+               // options.addArguments("--headless");
             }
             driver = new ChromeDriver(options);
         } else if (name.equalsIgnoreCase("Edge")) {

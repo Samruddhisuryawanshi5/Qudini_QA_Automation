@@ -46,6 +46,8 @@ public class queuePage extends TestBase {
 
     @FindBy(css = "div[data-testid=\"my-customer-tab\"] h5[class='q-name ng-binding']")
     WebElement validationName;
+    @FindBy(xpath = "//div[@id='advisor-pane']//button[@title='Quick Complete']")
+    WebElement quickCompleteButton;
 
 
     public void clickOnAddCustomer() {
@@ -91,5 +93,15 @@ public class queuePage extends TestBase {
     public void selectAdvisor(String advisorName){
         waitUntilElementIsVisible(By.xpath("//div[@class='content-info']//h5[contains(text(),'"+advisorName+"')]"));
         driver.findElement(By.xpath("//div[@class='content-info']//h5[contains(text(),'"+advisorName+"')]")).click();
+    }
+    public void quickCompleteButton(){
+        quickCompleteButton.click();
+    }
+    public void selectCompleteVisitOptions(String selectOption){
+        driver.findElement(By.xpath("//div[@class='col-xs-12']//span[text()='"+selectOption+"']")).click();
+    }
+    public void validateCustomerNotification(String  popUpMessage){
+        String expectedVAlue=driver.findElement(By.xpath("//div[@class='ui-notification ng-scope success clickable']//div")).getText();
+        Assert.assertEquals(expectedVAlue,popUpMessage);
     }
 }
