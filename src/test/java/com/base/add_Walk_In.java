@@ -14,6 +14,7 @@ public class add_Walk_In extends TestBase {
     public void beforeClass() {
         driver = openBrowser("chrome");
         util = new util(driver);
+        extent.createTest("Add_customer_to_queue");
     }
 
     @Test
@@ -41,7 +42,9 @@ public class add_Walk_In extends TestBase {
     @AfterClass
     public void tearDown() {
         driver.quit();
+        extent.flush();
     }
+
 
 
 }

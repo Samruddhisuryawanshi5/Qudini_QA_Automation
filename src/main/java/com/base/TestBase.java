@@ -1,5 +1,7 @@
 package com.base;
 
+import com.aventstack.extentreports.ExtentReports;
+import com.aventstack.extentreports.reporter.ExtentSparkReporter;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -14,13 +16,18 @@ import java.util.concurrent.TimeUnit;
 
 public class TestBase {
     public static WebDriver driver = null;
+   public static ExtentSparkReporter spark = new ExtentSparkReporter("target/Spark.html");
+    public static ExtentReports extent = new ExtentReports();
+
+
 
     public WebDriver openBrowser(String name) {
+        extent.attachReporter(spark);
         boolean isHeadless=true;
         if (name.equalsIgnoreCase("Chrome")) {
             ChromeOptions options = new ChromeOptions();
             if(isHeadless){
-               // options.addArguments("--headless");
+                options.addArguments("--headless");
             }
             driver = new ChromeDriver(options);
         } else if (name.equalsIgnoreCase("Edge")) {
