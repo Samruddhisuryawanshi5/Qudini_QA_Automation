@@ -11,19 +11,22 @@ import org.openqa.selenium.edge.EdgeDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
+import java.io.FileInputStream;
+import java.io.IOException;
 import java.time.Duration;
+import java.util.Properties;
 import java.util.concurrent.TimeUnit;
 
 public class TestBase {
     public static WebDriver driver = null;
    public static ExtentSparkReporter spark = new ExtentSparkReporter("target/Spark.html");
     public static ExtentReports extent = new ExtentReports();
-
-
+    Properties prop = new Properties();
+    FileInputStream input = null;
 
     public WebDriver openBrowser(String name) {
         extent.attachReporter(spark);
-        boolean isHeadless=true;
+        boolean isHeadless=false;
         if (name.equalsIgnoreCase("Chrome")) {
             ChromeOptions options = new ChromeOptions();
             if(isHeadless){
@@ -52,4 +55,16 @@ public class TestBase {
         }
         return false;
     }
+
+    public String getProperty(String key){
+
+        try {
+            input = new FileInputStream("src/test/java/resources/config.properties"); // path to the properties file
+            prop.load(input);
+        }catch (IOException ex) {
+            ex.printStackTrace();
+        }
+        return prop.getProperty(key);
+}
+
 }

@@ -2,6 +2,7 @@ package com.base;
 
 import com.base.pageObject.queuePage;
 import com.base.util.util;
+import org.testng.Assert;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeClass;
@@ -23,14 +24,24 @@ public class add_Walk_In extends TestBase {
         String customerName = "Test "+String.valueOf(randomNumber);
         
         util.login();
+        //Login to Qudini
         queuePage queuePage = new queuePage(driver);
+        util.ClosePopUpAtSTart();
         queuePage.clickOnAddCustomer();
+
+        //I Click on Add To Customer
         queuePage.selectProduct("IPad");
+        //I Select Product
         queuePage.enterDetailsInCustomerAddDialog(customerName,"");
+        queuePage.clickOnaddCustomerButton();
+
         queuePage.sucessMessage();
-        queuePage.validateCustomerDetails(customerName, "IPad");
+        //Success message should be displayed
+        String product = queuePage.validateCustomerDetails(customerName, "IPad");
+        Assert.assertEquals(product, "IPad");
         queuePage.clickOnCustomer(customerName);
         queuePage.validateCustomerDetailsPopUp(customerName);
+        //Customer details should be displayed
         queuePage.selectAdvisor("BLRStore_Server");
         queuePage.quickCompleteButton();
         queuePage.selectCompleteVisitOptions("Complete Customer");
@@ -44,6 +55,7 @@ public class add_Walk_In extends TestBase {
         driver.quit();
         extent.flush();
     }
+
 
 
 
