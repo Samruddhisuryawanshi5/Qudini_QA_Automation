@@ -1,9 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
 <suite name="All Test Suite">
-    <test verbose="2" preserve-order="true" name="Walk_in">
+    <test name="Walk_in" thread-count="2" parallel="classes" >
         <classes>
             <class name="com.base.add_Walk_In">
+                <methods>
+                    <exclude name="methods"></exclude>
+                </methods>
             </class>
         </classes>
     </test>

@@ -17,8 +17,6 @@ public class queuePage extends TestBase {
         PageFactory.initElements(driver, this);
     }
 
-    @FindBy(xpath = "//button[text()='CLOSE']")
-    WebElement closePopUp;
 
     @FindBy(id = "add-customer")
     WebElement addCustomer;
@@ -49,13 +47,8 @@ public class queuePage extends TestBase {
     @FindBy(xpath = "//div[@id='advisor-pane']//button[@title='Quick Complete']")
     WebElement quickCompleteButton;
 
-
-    public void clickOnAddCustomer() {
-        if (isPresent(By.xpath("//button[text()='CLOSE']"))) {
-            closePopUp.click();
-        }
-
-        addCustomer.click();
+    public void clickOnAddCustomer(){
+        clickOnAddCustomer();
     }
 
     public void selectProduct(String productName) {
@@ -69,17 +62,18 @@ public class queuePage extends TestBase {
         if (lName != null) {
             surname.sendKeys(lName);
         }
+
+    }
+    public void clickOnaddCustomerButton(){
         addCustomerDialogueButton.click();
     }
-
     public void sucessMessage() {
         Assert.assertTrue(successMessage.isDisplayed());
         closeButton.click();
     }
 
-    public void validateCustomerDetails(String fullName, String productName) {
-        String product = driver.findElement(By.xpath("//li[@data-testid='" + fullName + "-queueCard']//h5[@data-testid='allQueuesV2-productName']")).getText();
-        Assert.assertEquals(product, productName);
+    public String validateCustomerDetails(String fullName, String productName) {
+        return driver.findElement(By.xpath("//li[@data-testid='" + fullName + "-queueCard']//h5[@data-testid='allQueuesV2-productName']")).getText();
     }
 
     public void clickOnCustomer(String customerName) {
